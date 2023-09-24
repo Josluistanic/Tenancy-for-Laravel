@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TenantController;
 use Illuminate\Support\Facades\Route;
+use Stancl\Tenancy\Middleware\InitializeTenancyByPath;
 
 /*
 |--------------------------------------------------------------------------

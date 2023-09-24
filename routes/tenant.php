@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Tenant\TaskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +37,10 @@ Route::middleware([
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+        Route::resource('/tasks', TaskController::class)->only(['index', 'edit', 'update', 'show', 'create', 'destroy', 'store']);
+
+        Route::get('/file/{path}', fn($path) => response()->file(Storage::path($path)))->where('path', '.*')->name('getFileUrl');
     });
 
     require __DIR__ . '/auth.php';

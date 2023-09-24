@@ -1,4 +1,5 @@
 @import url("components.css");
+@import url("forms.css");
 
 @tailwind base;
 @tailwind components;
