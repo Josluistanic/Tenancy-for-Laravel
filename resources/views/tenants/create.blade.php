@@ -6,7 +6,7 @@
     </x-slot>
 
     <x-container>
-        <div class="card">
+        <div class="card mt-10">
             <div class="card-body">
 
                 <form action="{{ route('tenants.store') }}" method="post">

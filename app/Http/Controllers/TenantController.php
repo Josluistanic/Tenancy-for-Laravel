@@ -70,7 +70,20 @@ class TenantController extends Controller
      */
     public function update(Request $request, Tenant $tenant)
     {
-        //
+
+        $request->validate([
+            'id' => "required|unique:tenants,id,$tenant->id",
+        ]);
+
+        $tenant->update([
+            'id' => $request->id,
+        ]);
+
+        $tenant->domains()->update([
+            'domain' => $request->id . '.tenancy.test',
+        ]);
+
+        return redirect()->route('tenants.index');
     }
 
     /**
@@ -78,6 +91,7 @@ class TenantController extends Controller
      */
     public function destroy(Tenant $tenant)
     {
-        //
+        $tenant->delete();
+        return redirect()->route('tenants.index');
     }
 }
